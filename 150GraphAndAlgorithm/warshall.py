@@ -38,42 +38,18 @@ demo = [[0, 10, 3, 8, 0, 0, 0],
         [0, 7, 0, 0, 3, 0, 4],
         [0, 0, 0, 0, 0, 4, 0]]
 
-def dijkstra(graph, start, finish):
-    tree = []
-    fringe = []
-    parent = [0 for i in range(0, len(graph))]
-    distance = [sys.maxsize for i in range(0, len(graph))]
-    
-    tree.append(start)
-    for i in range(0, len(graph)):
-        if graph[start][i] > 0:
-            fringe.append(i)
-            parent[i] = start
-            distance[i] = graph[start][i]
+def warshall(graph):
+    b = [[False for i in range(len(graph))] for j in range(len(graph))]
+   
+    for i in range(len(graph)):
+        for j in range(len(graph)):
+            if (graph[i][j] > 0):
+                b[i][j] = True
 
-    while (finish not in tree) and len(fringe) != 0:
-        min = sys.maxsize
-        jmin = 0
-        for i in fringe:
-            if distance[i] < min:
-                min = distance[i]
-                jmin = i
-
-        tree.append(jmin)
-        fringe.remove(jmin)
-
+    for k in range(0, len(graph)):
         for i in range(0, len(graph)):
-            if graph[jmin][i] != 0:
-                if i not in tree:
-                    if i in fringe:
-                        if graph[jmin][i] + distance[jmin] < distance[i]:
-                            distance[i] = graph[jmin][i] + distance[jmin]
-                            parent[i] = jmin
-                    else:
-                        fringe.append(i)
-                        parent[i] = jmin
-                        distance[i] = graph[jmin][i] + distance[jmin]
+            for j in range(0, len(graph)):
+                b[i][j] = b[i][j] or (b[i][k] and b[k][j])
+    return b
 
-    return distance[finish]
-
-print(dijkstra(demo, 0, 6))
+print(warshall(undirected))

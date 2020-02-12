@@ -28,20 +28,25 @@ directed = [[ 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 2 ],
             [ 3, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 ],
             [ 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]]
 
-def BFS(graph):
+def BFS(graph, root):
     q = []
     visited = []
+    parents = []
     for i in range(0, len(graph)):
         visited.append(False)
+        parents.append(root)
 
-    q.append(0)
-    visited[0] = True
+    q.append(root)
+    visited[root] = True
     while len(q) != 0:
         head = q.pop(0)
         print(head)
         for i in range(0, len(graph)):
             if not visited[i] and graph[head][i]:
+                parents[i] = head
                 visited[i] = True
                 q.append(i)
 
-BFS(undirected)
+    return parents
+
+print(BFS(undirected, 0))

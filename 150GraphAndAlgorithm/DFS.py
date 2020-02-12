@@ -28,24 +28,26 @@ directed = [[ 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 2 ],
             [ 3, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 ],
             [ 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]]
 
-def DepthFirstSearch(graph):
+def DepthFirstSearch(graph, root):
     visited = []
+    parents = []
     for i in range(0, len(graph)):
         visited.append(False)
+        parents.append(root)
     
-    DFS(graph, 1, visited)
+    DFS(graph, root, visited, parents)
 
-    return
+    return parents
 
 
-def DFS(graph, node, visited):
+def DFS(graph, node, visited, parents):
     visited[node] = True
     print(node)
 
     for i in range(0, len(graph)):
         if (graph[node][i] != 0 and not visited[i]):
-            DFS(graph, i, visited)
-    
-    return
+            parents[i] = node
+            DFS(graph, i, visited, parents)
 
-DepthFirstSearch(undirected)
+
+print("parents list:" + DepthFirstSearch(undirected, 1))
