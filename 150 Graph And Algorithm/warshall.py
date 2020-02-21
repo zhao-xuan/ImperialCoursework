@@ -30,45 +30,26 @@ directed = [[ 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 2 ],
             [ 3, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 ],
             [ 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]]
 
-demo = [[0, 3, 5, 4], 
-        [3, 0, 4, 0], 
-        [5, 4, 0, 2],
-        [4, 0, 2, 0]]
+demo = [[0, 10, 3, 8, 0, 0, 0], 
+        [10, 0, 0, 9, 0, 7, 0],
+        [3, 0, 0, 4, 0, 0, 0],
+        [8, 9, 4, 0, 6, 0, 0],
+        [0, 0, 0, 6, 0, 3, 0],
+        [0, 7, 0, 0, 3, 0, 4],
+        [0, 0, 0, 0, 0, 4, 0]]
 
-def prim(graph, start):
-    tree = []
-    fringe = []
-    weight = [sys.maxsize for i in range(0, len(graph))]
-    parent = [0 for i in range(0, len(graph))]
+def warshall(graph):
+    b = [[False for i in range(len(graph))] for j in range(len(graph))]
+   
+    for i in range(len(graph)):
+        for j in range(len(graph)):
+            if (graph[i][j] > 0):
+                b[i][j] = True
 
-    tree.append(start)
-    for i in range(0, len(graph)):
-        if graph[start][i] > 0:
-            fringe.append(i)
-            parent[i] = start
-            weight[i] = graph[start][i]
-
-    while len(fringe) != 0:
-        min = sys.maxsize
-        jmin = 0
-        for i in tree:
-            for j in fringe:
-                if graph[i][j] > 0 and graph[i][j] < min:
-                    min = graph[i][j]
-                    jmin = j
-        fringe.remove(jmin)
-        tree.append(jmin)
+    for k in range(0, len(graph)):
         for i in range(0, len(graph)):
-            if graph[jmin][i] != 0:
-                if i not in tree:
-                    if i in fringe:
-                        if graph[jmin][i] < weight[i]:
-                            weight[i] = graph[jmin][i]
-                            parent[i] = jmin
-                    else:
-                        fringe.append(i)
-                        weight[i] = graph[jmin][i]
-                        parent[i] = jmin
-    return parent
+            for j in range(0, len(graph)):
+                b[i][j] = b[i][j] or (b[i][k] and b[k][j])
+    return b
 
-print(prim(demo, 0))
+print(warshall(undirected))

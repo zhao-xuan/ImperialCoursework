@@ -1,0 +1,139 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Practice845d",
+            "request": "launch",
+            "mainClass": "Practice845d",
+            "projectName": "JavaPractice_9333e7c6"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Practice8f65",
+            "request": "launch",
+            "mainClass": "Practice8f65"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Practicedd4c",
+            "request": "launch",
+            "mainClass": "Practicedd4c",
+            "projectName": "JavaPractice_4013d6ce"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Practice0f05",
+            "request": "launch",
+            "mainClass": "Practice0f05",
+            "projectName": "JavaPractice_4013d6ce"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Practicee6fd",
+            "request": "launch",
+            "mainClass": "Practicee6fd",
+            "projectName": "JavaPractice_4013d6ce"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Practice6346",
+            "request": "launch",
+            "mainClass": "Practice6346",
+            "projectName": "JavaPractice_4013d6ce"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch) - Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Practice014e<JavaPractice_4013d6ce>",
+            "request": "launch",
+            "mainClass": "Practice014e",
+            "projectName": "JavaPractice_4013d6ce"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Practice0378<JavaPractice_4013d6ce>",
+            "request": "launch",
+            "mainClass": "Practice0378",
+            "projectName": "JavaPractice_4013d6ce"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Practice2d33<JavaPractice_4013d6ce>",
+            "request": "launch",
+            "mainClass": "Practice2d33",
+            "projectName": "JavaPractice_4013d6ce"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Practice4c70<JavaPractice_4013d6ce>",
+            "request": "launch",
+            "mainClass": "Practice4c70",
+            "projectName": "JavaPractice_4013d6ce"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Practice67dd<JavaPractice_4013d6ce>",
+            "request": "launch",
+            "mainClass": "Practice67dd",
+            "projectName": "JavaPractice_4013d6ce"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Practice7206<JavaPractice_4013d6ce>",
+            "request": "launch",
+            "mainClass": "Practice7206",
+            "projectName": "JavaPractice_4013d6ce"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Practice7ec8<JavaPractice_4013d6ce>",
+            "request": "launch",
+            "mainClass": "Practice7ec8",
+            "projectName": "JavaPractice_4013d6ce"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Practice98e3<JavaPractice_4013d6ce>",
+            "request": "launch",
+            "mainClass": "Practice98e3",
+            "projectName": "JavaPractice_4013d6ce"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Practicebec2<JavaPractice_4013d6ce>",
+            "request": "launch",
+            "mainClass": "Practicebec2",
+            "projectName": "JavaPractice_4013d6ce"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-DrawingEngineDemo<JavaPractice_4013d6ce>",
+            "request": "launch",
+            "mainClass": "Practicec2b8.DrawingEngineDemo",
+            "projectName": "JavaPractice_4013d6ce"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Practicef79b<JavaPractice_4013d6ce>",
+            "request": "launch",
+            "mainClass": "Practicef79b",
+            "projectName": "JavaPractice_4013d6ce"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Practicef7c3<JavaPractice_4013d6ce>",
+            "request": "launch",
+            "mainClass": "Practicef7c3",
+            "projectName": "JavaPractice_4013d6ce"
+        }
+    ]
+}
