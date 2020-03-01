@@ -459,9 +459,117 @@ D1: $Minterm=Q3'\cdot Q2\cdot Q1+C1'\cdot Q1+C1'\cdot Q2$
 
 It will not be stuck in the wrong state.
 
-
-
 ## Coursework 6 - Binary Sequence Recogniser
 
+#### 1
 
+```mermaid
+graph LR
+state4 --0--> state1
+state1((Idle)) --1--> state2((1)) --1--> state3((11)) --0--> state4((110)) --1--> state5((1101)) --1--> state3
+state1 --0--> state1
+state2 --0--> state1
+state3 --1--> state3
+state5 --0--> state1
+```
 
+#### 2
+
+| Input | State | State Type | Q3   | Q2   | Q1   | State | D3   | D2   | D1   |
+| ----- | ----- | ---------- | ---- | ---- | ---- | ----- | ---- | ---- | ---- |
+| 0     | 1     | Idle       | 0    | 0    | 0    | 1     | 0    | 0    | 0    |
+| 0     | 2     | 1          | 0    | 0    | 1    | 1     | 0    | 0    | 0    |
+| 0     | 3     | 11         | 0    | 1    | 0    | 4     | 0    | 1    | 1    |
+| 0     | 4     | 110        | 0    | 1    | 1    | 1     | 0    | 0    | 0    |
+| 0     | 5     | 1101       | 1    | 0    | 0    | 1     | 0    | 0    | 0    |
+| 0     | 6     | X          | 1    | 0    | 1    | X     | X    | X    | X    |
+| 0     | 7     | X          | 1    | 1    | 0    | X     | X    | X    | X    |
+| 0     | 8     | X          | 1    | 1    | 1    | X     | X    | X    | X    |
+| 1     | 1     | Idle       | 0    | 0    | 0    | 2     | 0    | 0    | 1    |
+| 1     | 2     | 1          | 0    | 0    | 1    | 3     | 0    | 1    | 0    |
+| 1     | 3     | 11         | 0    | 1    | 0    | 3     | 0    | 1    | 0    |
+| 1     | 4     | 110        | 0    | 1    | 1    | 5     | 1    | 0    | 0    |
+| 1     | 5     | 1101       | 1    | 0    | 0    | 3     | 0    | 1    | 0    |
+| 1     | 6     | X          | 1    | 0    | 1    | X     | X    | X    | X    |
+| 1     | 7     | X          | 1    | 1    | 0    | X     | X    | X    | X    |
+| 1     | 8     | X          | 1    | 1    | 1    | X     | X    | X    | X    |
+
+K-map for D3:
+
+| IQ3 \ Q2Q1 | 00   | 01   | 11   | 10   |
+| ---------- | ---- | ---- | ---- | ---- |
+| 00         | 0    | 0    | 0    | 0    |
+| 01         | 0    | X    | X    | X    |
+| 11         | 0    | X    | X    | X    |
+| 10         | 0    | 0    | 1    | 0    |
+
+K-map for D2:
+
+| IQ3 \ Q2Q1 | 00   | 01   | 11   | 10   |
+| ---------- | ---- | ---- | ---- | ---- |
+| 00         | 0    | 0    | 0    | 1    |
+| 01         | 0    | X    | X    | X    |
+| 11         | 1    | X    | X    | X    |
+| 10         | 0    | 1    | 0    | 1    |
+
+K-map for D1:
+
+| IQ3 \ Q2Q1 | 00   | 01   | 11   | 10   |
+| ---------- | ---- | ---- | ---- | ---- |
+| 00         | 0    | 0    | 0    | 1    |
+| 01         | 0    | X    | X    | X    |
+| 11         | 0    | X    | X    | X    |
+| 10         | 1    | 0    | 0    | 0    |
+
+Minterm for D3: $D3=I\cdot Q_2\cdot Q_1$
+
+Minterm for D2: $D2=I\cdot Q_3+Q_2\cdot Q_1'+I\cdot Q_2'\cdot Q1$
+
+Minterm for D1: $D1=I\cdot Q_3'\cdot Q_2'\cdot Q_1'+I'\cdot Q_2\cdot Q_1'$
+
+#### 3
+
+Output logic: $R=Q_3\cdot Q_2'\cdot Q_1'$
+
+#### 4
+
+| Input | Current State | Q3   | Q2   | Q1   | Next State | D3   | D2   | D1   |
+| ----- | ------------- | ---- | ---- | ---- | ---------- | ---- | ---- | ---- |
+| 0     | 6             | 1    | 0    | 1    | 1          | 0    | 0    | 0    |
+| 0     | 7             | 1    | 1    | 0    | 4          | 0    | 1    | 1    |
+| 0     | 8             | 1    | 1    | 1    | 1          | 0    | 0    | 0    |
+| 1     | 6             | 1    | 0    | 1    | 3          | 0    | 1    | 0    |
+| 1     | 7             | 1    | 1    | 0    | 3          | 0    | 1    | 0    |
+| 1     | 8             | 1    | 1    | 1    | 7          | 1    | 1    | 0    |
+
+##  Coursework 7 - Binary Coded Decimal Adder
+
+#### 1
+
+K-map:
+
+| Q3Q2 \ Q1Q0 | 00   | 01   | 11   | 10   |
+| ----------- | ---- | ---- | ---- | ---- |
+| 00          | 0    | 0    | 0    | 0    |
+| 01          | 0    | 0    | 0    | 0    |
+| 11          | 1    | 1    | 1    | 1    |
+| 10          | 0    | 0    | 1    | 1    |
+
+Minterm: $INC=Q_3\cdot Q_2+Q_3\cdot Q_1=Q_3\cdot (Q_2+Q_1)$
+
+#### 2
+
+K-map for the BCD Carry:
+
+| Q3Q2 \ Q1Q0 | 00   | 01   | 11   | 10   |
+| ----------- | ---- | ---- | ---- | ---- |
+| 00          | X    | X    | X    | X    |
+| 01          | 0    | 0    | 0    | 0    |
+| 11          | 1    | 1    | 1    | 1    |
+| 10          | 0    | 0    | 1    | 1    |
+
+Minterm: $CARRY=Q_3\cdot Q_2+Q_3\cdot Q_1=Q_3\cdot (Q_2+Q_1)$
+
+#### 3
+
+The question mark should be replaced with a circuit that generates 0110 when the BCD carry-out is 1, and 0000 when BCD carry-out is 0. Thus, $Q_3$ and $Q_0$ could be 0 and $Q_2$ and $Q_1$ could be connected to carry-out directly
