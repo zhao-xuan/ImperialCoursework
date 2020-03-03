@@ -29,7 +29,9 @@ public class TransportUnit extends Entity {
     @Override
     public int minimumStrikeToDestroy() {
         return Math.max(lifePoints,
-                entities.stream().map(e -> e.minimumStrikeToDestroy() * 2).max(Integer::compareTo).get());
+                entities.stream()
+                        .map(e -> e.minimumStrikeToDestroy() * DAMAGE_DECAY)
+                        .max(Integer::compareTo).get());
     }
 
     @Override

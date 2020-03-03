@@ -5,11 +5,8 @@ import generalmatrices.pair.PairWithOperators;
 import java.util.List;
 
 public class Example {
-
-  public static Matrix<PairWithOperators> multiplyPairMatrices(
-        List<Matrix<PairWithOperators>> matrices) {
-    // TODO: implement as part of Question 4
-    return null;
+  public static Matrix<PairWithOperators> multiplyPairMatrices(List<Matrix<PairWithOperators>> matrices) {
+    assert !matrices.isEmpty();
+    return matrices.stream().reduce((i, j) -> i.product(j, (a, b) -> a.sum(b), (c, d) -> c.product(d))).orElse(null);
   }
-
 }
