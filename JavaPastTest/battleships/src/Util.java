@@ -3,23 +3,31 @@ import java.util.Arrays;
 public class Util {
 
     private static int letterToIndex(char letter) {
-        return -1; // TODO delete this line for Question 1a.
+        return letter - 'A';
     }
 
     private static int numberToIndex(char number) {
-        return -1; // TODO: delete this line for Question 1b.
+        return number - '0';
     }
 
     public static Coordinate parseCoordinate(String s) {
-        return null; // TODO: delete this line for Question 1c.
+        return new Coordinate(letterToIndex(s.charAt(0)), numberToIndex(s.charAt(1)));
     }
 
     public static Piece hideShip(Piece piece) {
-        return null; // TODO: delete this line for Question 1d.
+        if (piece == Piece.SHIP) {
+            return Piece.WATER;
+        } else {
+            return piece;
+        }
     }
 
     public static void hideShips(Piece[][] grid) {
-        // TODO: Question 1e.
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid.length; j++) {
+                grid[i][j] = hideShip(grid[i][j]);
+            }
+        }
     }
 
     public static Piece[][] deepClone(Piece[][] input) {

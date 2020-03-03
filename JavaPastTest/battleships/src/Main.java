@@ -5,8 +5,23 @@ public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         Grid grid = makeInitialGrid();
+        int count = 0;
 
-        // TODO: Question 4.
+        while (!grid.areAllSunk()) {
+            System.out.println("========Battleship Grid========");
+            System.out.println(grid);
+            System.out.println("========Please enter a point of attack========");
+            Coordinate coord = Util.parseCoordinate(input.next());
+            if (grid.wouldAttackSucceed(coord)) {
+                System.out.println("Direct Hit!");
+                grid.attackCell(coord);
+            }
+            count++;
+        }
+
+        System.out.println("There were " + count + " attacks required to sink all ships!");
+        System.out.println("========Final Grid========");
+        System.out.println(grid);
     }
 
     private static Grid makeInitialGrid() {
