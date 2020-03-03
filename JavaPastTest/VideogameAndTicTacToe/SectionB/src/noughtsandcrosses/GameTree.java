@@ -2,6 +2,8 @@ package noughtsandcrosses;
 
 import java.util.Iterator;
 
+import static noughtsandcrosses.Board.EMPTY;
+
 public class GameTree implements GameTreeInterface {
 	
 	private GameTreeNode root;      //reference to the root board of a game tree
@@ -24,7 +26,11 @@ public class GameTree implements GameTreeInterface {
 	//YOU ARE ASKED TO IMPLEMENT THIS METHOD
 	//post: Returns the number of boards stored in a game tree, excluded the root.
 	private int sizeTree(GameTreeNode node){
-		
+		int count = 0;
+		for (GameTreeNode n : node.getChildren()) {
+			count += sizeTree(n);
+		}
+		return 1 + node.numberOfChildren() + count;
 	}	
 	
 	//post: Expands the game tree fully by adding all possible boards in the game.
@@ -38,7 +44,21 @@ public class GameTree implements GameTreeInterface {
 	//      all the possible moves that the computer and the user player
 	//      can make, until the game is finished, from the given node onwards.
 	private void expandTree(GameTreeNode node){
-	 	
+		Board currBoard = node.getBoard();
+	 	if (!currBoard.isFinished()) {
+	 		char currPlayer = currBoard.getTurn();
+	 		for (int i = 1; i <= 9; i++) {
+				System.out.println(i);
+	 			if (currBoard.getMark(i) == EMPTY) {
+	 				Board temp = currBoard.makeCopy();
+	 				temp.setMark(i, currPlayer);
+	 				GameTreeNode child = new GameTreeNode(temp);
+	 				currBoard.setLastMarkPosition(i);
+	 				node.getChildren().add(1, child);
+	 				expandTree(child);
+				}
+			}
+		}
 	}
 	
 	//pre:  The game tree is fully expanded.
@@ -61,7 +81,7 @@ public class GameTree implements GameTreeInterface {
  			//score 3 for a winning board for the given player, score 2 for a draw baord,
  			//score 1 for a losing board for the given player
  			char winner = board.getWinnerMark();
- 			if (winner == Board.EMPTY) {
+ 			if (winner == EMPTY) {
 				//this is a draw!
 				node.setScore(2);
 			} else { node.setScore(winner == player ? 3 : 1);}

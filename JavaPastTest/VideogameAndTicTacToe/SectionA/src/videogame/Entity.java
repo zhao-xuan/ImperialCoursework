@@ -12,17 +12,28 @@ public abstract class Entity {
 	}
 
 	public final boolean isAlive() {
-		/* TODO: Implement as part of Section A Question 2 */
-		return false;
+		return lifePoints > 0;
 	}
 	
 	public final int applySpell(SpellCaster spellCaster) {
-		/* TODO: Implement as part of Section A Question 2 */
-		return -1;
+		return propagateDamage(spellCaster.getStrength());
 	}
 	
-	protected abstract int propagateDamage(int damageAmount);
+	protected int propagateDamage(int damageAmount) {
+		assert damageAmount >= 0;
+		if (damageAmount > lifePoints) {
+			lifePoints = 0;
+			return damageAmount - lifePoints;
+		} else {
+			lifePoints -= damageAmount;
+			return damageAmount;
+		}
+	}
 
 	public abstract int minimumStrikeToDestroy();
-	
+
+	@Override
+	public String toString() {
+		return name + "(" + lifePoints + ")";
+	}
 }
