@@ -22,7 +22,7 @@ public class Graph implements GraphInterface{
 	//      edges of that node. 
 	private void setIncomingDegreeRecursively(GraphNode node) {
 		node.setDegree(node.getIncomingEdges().size());
-		node.getIncomingEdges().forEach(i -> setIncomingDegreeRecursively(i.getEndPoint()));
+		node.getOutgoingEdges().forEach(i -> setIncomingDegreeRecursively(i.getEndPoint()));
 	}
 
 	//YOU ARE ASKED TO IMPLEMENT THIS METHOD
@@ -43,7 +43,7 @@ public class Graph implements GraphInterface{
 			tempNode.getOutgoingEdges().forEach(i -> {
 				int tempDegree = i.getEndPoint().getDegree();
 				i.getEndPoint().setDegree(tempDegree - 1);
-				if (tempDegree - 1 == 0 || tempDegree == 0) {
+				if (i.getEndPoint().getDegree() == 0) {
 					temp.enqueue(i.getEndPoint());
 				}
 			});
@@ -70,8 +70,6 @@ public class Graph implements GraphInterface{
 			start = sortedNodes.dequeue();
 			int max = 0;
 			for (GraphEdge e : start.getIncomingEdges()) {
-				System.out.println(start.getLabel() + " and "
-						+ e.getStartPoint().getLabel() + " and " + e.getStartPoint().EarliestCompletionTime());
 				int temp = e.getTaskDuration() + e.getStartPoint().EarliestCompletionTime();
 				if (max < temp) {
 					max = temp;
