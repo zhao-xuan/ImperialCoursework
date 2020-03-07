@@ -14,7 +14,7 @@ public class HuffmanData implements Comparable<HuffmanData>{
 		this.frequency = freq;
 		this.symbol = '\u0000';
 	}
-	
+
 	public int getFrequency(){
 		return frequency;
 	}
@@ -25,5 +25,10 @@ public class HuffmanData implements Comparable<HuffmanData>{
 	
 	public int compareTo(HuffmanData entry){
 		return frequency - entry.getFrequency();
+	}
+
+	@Override
+	public String toString() {
+		return "HuffmanData(freq=" + frequency + ", symbol=" + symbol + ")";
 	}
 }

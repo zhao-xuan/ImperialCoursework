@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Huffman {
 
 	private HuffmanData[] leafEntries;
@@ -32,16 +34,36 @@ public class Huffman {
 	}
 
 	public void createHuffmanTree() {
-	// Process PriorityQueue pq until there is a complete HuffmanTree
-	// ADD YOUR CODE HERE
+		System.out.println(pq);
+
+		// Process PriorityQueue pq until there is a complete HuffmanTree
+        while (pq.getSize() > 1) {
+            BinaryTree<HuffmanData> t1 = (BinaryTree<HuffmanData>) pq.removeMin();
+            BinaryTree<HuffmanData> t2 = (BinaryTree<HuffmanData>) pq.removeMin();
+            BinaryTree<HuffmanData> newTree =
+                    new BinaryTree<HuffmanData>(new HuffmanData(t1.getRootData().getFrequency()
+                            + t2.getRootData().getFrequency()),
+                            t1, t2);
+            pq.add(newTree);
+        }
+		System.out.println(pq);
 	}
 
 	public void printCode() {
-	// ADD YOUR CODE HERE. 
+        BinaryTree<HuffmanData> tree = (BinaryTree<HuffmanData>) pq.getMin();
+        printCodeProcedure("", tree);
 	}
 
 	private void printCodeProcedure(String code, BinaryTreeInterface<HuffmanData> tree) {
-	// Print out a complete HuffmanTree 
-        // ADD YOUR CODE HERE
+	    // Print out a complete HuffmanTree
+		if (tree == null) {
+			return;
+		}
+        if (tree.getRootData().getSymbol() != '\u0000') {
+            System.out.println(tree.getRootData().getSymbol() + ": " + code);
+        }
+        printCodeProcedure(code + "0", tree.getLeftSubtree());
+        printCodeProcedure(code + "1", tree.getRightSubtree());
 	}
+
 }

@@ -12,7 +12,6 @@ public class TestHuffman {
 		// Process PriorityQueue to create a HuffmanTree
 		myHuffmanTest.printCode();
 		//Print out the codes stored in the HuffmanTree
-
 	}
 
 }// end of Test class

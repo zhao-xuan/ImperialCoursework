@@ -17,7 +17,12 @@ public class BinaryTree<K extends Comparable<K>> implements BinaryTreeInterface<
 			left = leftNode;
 			right = rightNode;
 		}
-	}
+
+        @Override
+        public String toString() {
+            return "Node(" + data + ", " + left + ", " + right + ")";
+        }
+    }
 
 	private TreeNode root;
 
@@ -72,4 +77,8 @@ public class BinaryTree<K extends Comparable<K>> implements BinaryTreeInterface<
 	}
 
 
+    @Override
+    public String toString() {
+        return "BinaryTree(" + root + ")";
+    }
 }
