@@ -6,13 +6,14 @@ public class Notifier {
 	Set<? extends Notifiable> notifiables;
 	
 	public Notifier (Set<? extends Notifiable> n) {
-        // WRITE YOUR CODE HERE
+        notifiables = n;
 	}
 	
 	public void doNotifyAll(String message) {
-
 		Iterator<? extends Notifiable> i = notifiables.iterator();
-        // WRITE YOUR CODE HERE
-		
+        while(i.hasNext()) {
+        	i.notify();
+        	i = (Iterator<? extends Notifiable>) i.next();
+		}
 	}
 }

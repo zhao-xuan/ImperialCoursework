@@ -15,5 +15,4 @@ public class Undergraduate extends Student  {
 	public void setTutor(Academic tutor) {
 		this.tutor = tutor;
 	}
-	
 }
