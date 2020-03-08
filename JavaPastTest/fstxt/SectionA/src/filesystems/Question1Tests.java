@@ -5,8 +5,6 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class Question1Tests {
-
-  /*
   @Test
   public void getSize() throws Exception {
     DocFile file = new DocDataFile("testfile.txt",
@@ -68,6 +66,4 @@ public class Question1Tests {
     }
 
   }
-  */
-
 }

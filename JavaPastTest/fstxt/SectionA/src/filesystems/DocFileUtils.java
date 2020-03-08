@@ -11,8 +11,9 @@ public class DocFileUtils {
    *         or indirectly in this directory.
    */
   public static int getTotalDirectorySize(DocDirectory directory) {
-    // TODO: implement as part of Question 4
-    return 0;
+    return directory.getSize()
+             + directory.getDataFiles().stream().mapToInt(DocDataFile::getSize).sum()
+             + directory.getDirectories().stream().mapToInt(DocFileUtils::getTotalDirectorySize).sum();
   }
 
   /**
@@ -26,8 +27,7 @@ public class DocFileUtils {
    *         this duplicate to the destination directory.
    */
   public static boolean copy(DocDirectory src, DocDirectory dst, String filename) {
-    // TODO: implement as part of Question 4
-    return false;
+    return src.containsFile(filename) && dst.getAllFiles().add(src.getFile(filename).duplicate());
   }
 
   /**
@@ -38,8 +38,13 @@ public class DocFileUtils {
    *         given byte.  Otherwise, return an optional containing any such file.
    */
   public static Optional<DocDataFile> searchForByte(DocFile root, byte someByte) {
-    // TODO: implement as part of Question 4
-    return Optional.empty();
+    if (root.isDataFile()) {
+      return root.asDataFile().containsByte(someByte) ? Optional.of(root.asDataFile()) : Optional.empty();
+    } else {
+      return root.asDirectory().getAllFiles().stream()
+              .map(i -> searchForByte(i, someByte))
+              .filter(i -> i.isPresent())
+              .findAny().orElse(Optional.empty());
+    }
   }
-
 }

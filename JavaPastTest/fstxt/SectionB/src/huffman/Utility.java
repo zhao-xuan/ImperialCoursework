@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -43,7 +44,13 @@ public class Utility {
   }
 
   public static Map<String, Integer> countWords(List<String> words) {
-    //TODO replace the current sequenctial implementation with a concurrent one (Q4)
-    return words.stream().collect(Collectors.toMap(w -> w, w -> 1, Integer::sum));
+    int count = 0;
+    int NUM_OF_THREADS = 3;
+    Thread[] threads = new Thread[NUM_OF_THREADS];
+    for (int i = 0; i < NUM_OF_THREADS; i++) {
+      threads[i] = new Thread();
+    }
+
+    return words.stream().collect(Collectors.toMap(Function.identity(), w -> 1, Integer::sum));
   }
 }
