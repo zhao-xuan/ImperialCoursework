@@ -4,14 +4,38 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Utility {
+
+  private static class WordCountRunner implements Runnable {
+    private Map<String, Integer> map;
+    private List<String> words;
+    private int NUM_OF_THREADS;
+    private int threadNum;
+
+    public WordCountRunner(Map<String, Integer> map, List<String> words, int NUM_OF_THREADS, int threadNum) {
+      this.map = map;
+      this.words = words;
+      this.NUM_OF_THREADS = NUM_OF_THREADS;
+      this.threadNum = threadNum;
+    }
+
+    @Override
+    public void run() {
+      for (int count = threadNum; count < words.size(); count += NUM_OF_THREADS) {
+        String currWord = words.get(count);
+        if (map.containsKey(currWord)) {
+          map.put(currWord, map.get(currWord) + 1);
+        } else {
+          map.put(currWord, 1);
+        }
+      }
+    }
+  }
 
   public static List<String> getWords(String filePath) {
     List<String> words = null;
@@ -44,13 +68,30 @@ public class Utility {
   }
 
   public static Map<String, Integer> countWords(List<String> words) {
-    int count = 0;
-    int NUM_OF_THREADS = 3;
-    Thread[] threads = new Thread[NUM_OF_THREADS];
-    for (int i = 0; i < NUM_OF_THREADS; i++) {
-      threads[i] = new Thread();
+    if (words == null) {
+      throw new NullPointerException();
     }
 
-    return words.stream().collect(Collectors.toMap(Function.identity(), w -> 1, Integer::sum));
+    int NUM_OF_THREADS = 3;
+    Runnable[] runnables = new Runnable[NUM_OF_THREADS];
+    Thread[] threads = new Thread[NUM_OF_THREADS];
+    Map<String, Integer> map = new HashMap<>();
+
+    for (int i = 0; i < NUM_OF_THREADS; i++) {
+      runnables[i] = new WordCountRunner(map, words, NUM_OF_THREADS, i);
+      threads[i] = new Thread(runnables[i]);
+    }
+
+    Arrays.stream(threads).forEach(i -> i.start());
+    Arrays.stream(threads).forEach(i -> {
+      try {
+        i.join();
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    });
+
+    return map;
+    //return words.stream().collect(Collectors.toMap(Function.identity(), w -> 1, Integer::sum));
   }
 }
