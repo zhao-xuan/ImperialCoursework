@@ -58,15 +58,14 @@ public class PriorityQueue<T extends Comparable<T>> implements
 		items[size++] = newEntry;
 		int index = size - 1;
 		int parent = (index - 1) / 2;
-		while(items[index].compareTo(items[parent]) < 0) {
+		while(index > 0 && items[index].compareTo(items[parent]) < 0) {
 			T temp = items[index];
 			items[index] = items[parent];
 			items[parent] = temp;
-			index = parent;
+			index--;
 			parent = (index - 1) / 2;
 		}
 	}
-
 	/**
 	 * Removes the element with highest priority.
 	 */

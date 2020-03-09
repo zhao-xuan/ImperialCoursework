@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class WeightedNineTailsProblem {
 	
 	public static void main(String[] args) {
-		
+
 		NineTailsWeightedGraph graph = new NineTailsWeightedGraph();
 		
 		while (true){
