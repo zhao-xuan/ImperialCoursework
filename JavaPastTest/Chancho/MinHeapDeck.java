@@ -35,19 +35,24 @@ public final class MinHeapDeck implements Deck {
 	}
 
 	public Deck cut() {
-
-		// TODO: TASK 2a: IMPLEMENTATION OF THIS METHOD 
-
+		Deck result = new MinHeapDeck();
+		while(heap.size() > result.size()) {
+			result.addToBottom(removeFromTop());
+		}
+		return result;
 	}
 
 	public Deck riffleShuffle(Deck deck) {
-		
-		// TODO: TASK 2b: IMPLEMENTATION OF THIS METHOD
+		Deck result = new MinHeapDeck();
+		while (deck.size() > 0) {
+			result.addToBottom(removeFromTop());
+			result.addToBottom(deck.removeFromTop());
+		}
+		return result;
 	}
 
 	@Override
 	public String toString() {
 		return heap.toString();
 	}
-
 }

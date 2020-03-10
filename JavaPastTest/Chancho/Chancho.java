@@ -1,3 +1,4 @@
+import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
@@ -39,8 +40,22 @@ public final class Chancho {
 	}
 
 	private static Set<Player> setupPlayers() {
-		// TODO: TASK 5: IMPLEMENTATION OF THIS METHOD
+		CardPile a = new CardPile(1);
+		CardPile b = new CardPile(1);
+		CardPile c = new CardPile(1);
+		CardPile d = new CardPile(1);
+		Player p1 = new AutoPlayer(d, a, "P1");
+		Player p2 = new AutoPlayer(a, b, "P2");
+		Player p3 = new AutoPlayer(b, c, "P3");
+		Player manual = new ManualPlayer(c, d, "P4");
+		Set<Player> players = new HashSet<>();
+		players.add(p1);
+		players.add(p2);
+		players.add(p3);
+		players.add(manual);
 
+
+		return players;
 	}
 
 	/**

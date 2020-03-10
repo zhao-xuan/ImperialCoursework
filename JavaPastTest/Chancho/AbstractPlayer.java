@@ -17,6 +17,10 @@ public abstract class AbstractPlayer implements Player {
 	private CardPile pickupPile;
 	private CardPile discardPile;
 
+	public CardPile getPickupPile() {
+		return pickupPile;
+	}
+
 	AbstractPlayer(CardPile left, CardPile right, String name) {
 		this.discardPile = left;
 		this.pickupPile = right;

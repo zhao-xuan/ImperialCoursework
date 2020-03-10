@@ -1,3 +1,6 @@
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * The class Dealer encapsulates the actions of a Chancho game-dealer. The game
@@ -11,7 +14,33 @@
  * 
  */
 public final class Dealer {
+    private final Set<Player> players;
+    private final Deck deck;
 
-	// TODO: TASK 4: IMPLEMENTATION OF THIS CLASS
+    public Dealer(Set<Player> players, Deck deck) {
+        this.players = players;
+        this.deck = deck;
+        for (Player p : players) {
+            for (int i = 0; i < 4; i++) {
+                p.addToHand(deck.removeFromTop());
+            }
+        }
+    }
 
+    public void playGame() {
+        while(true) {
+            players.forEach(i -> i.discard());
+            players.forEach(i -> i.pickup());
+            List<Player> winners = players.stream().filter(i -> i.hasWon()).collect(Collectors.toList());
+            if (!winners.isEmpty()) {
+                congratulateWinners();
+                break;
+            }
+        }
+    }
+
+    private void congratulateWinners() {
+        System.out.println("The game has been won! Congratulations to:");
+        players.stream().filter(i -> i.hasWon()).forEach(i -> System.out.println(i));
+    }
 }
