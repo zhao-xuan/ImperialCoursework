@@ -12,6 +12,13 @@ import java.util.stream.IntStream;
  * You must implement the <code>checkObjects</code>  method.
  */
 
+public class CollisionDetectorThread implements Runnable {
+  @Override
+  public void run() {
+
+  }
+}
+
 public class ParallelCollisionDetection {
 
   public static void main(String[] args) throws Exception {
@@ -51,8 +58,6 @@ public class ParallelCollisionDetection {
    */
   private static boolean checkObjects(
       PriorityQueueInterface<Object2D> sortedPoints, AABB region) {
-
-
     /* Spawn three threads that check for collisions in parallel. 
      *
      * The behavior of your parallel implementation has to be functionally equivalent to the
@@ -73,9 +78,29 @@ public class ParallelCollisionDetection {
      * to explain if other synchronization choices where possible and why you preferred
      * this one
      */
+    Thread t1 = new Thread();
+    Thread t2 = new
 
-    
-    return false;
+    QuadTree qt = new QuadTree(region, 4);
+    int qSize = sortedPoints.getSize();
+    for (int i = 0; i < qSize; i++) {
+      Object2D point = sortedPoints.peek();
+      Point2D center = point.getCenter();
+      double size = point.getSize();
+      AABB safetyRegion = new AABB(new Point2D(center.x - size, center.y - size),
+              new Point2D(center.x + size, center.y + size));
+      sortedPoints.remove();
+      synchronized (qt) {
+        ListInterface<Object2D> any = qt.queryRegion(safetyRegion);
+        if (!any.isEmpty()) {
+          return false;
+        } else {
+          qt.add(point);
+        }
+      }
+    }
+
+    return true;
 
     /*
      * Justify here your implementation choice versus other valid alternatives

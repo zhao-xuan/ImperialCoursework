@@ -91,7 +91,7 @@ public class PriorityQueue<T extends Comparable<T>> implements
       if (items[left].compareTo(items[root]) < 0) {
         T temp = items[left];
         items[left] = items[root];
-        items[root] = items[left];
+        items[root] = temp;
         PQRebuild(left);
       }
     } else {
@@ -99,7 +99,7 @@ public class PriorityQueue<T extends Comparable<T>> implements
       if (items[smaller].compareTo(items[root]) < 0) {
         T temp = items[smaller];
         items[smaller] = items[root];
-        items[root] = items[smaller];
+        items[root] = temp;
         PQRebuild(smaller);
       }
     }

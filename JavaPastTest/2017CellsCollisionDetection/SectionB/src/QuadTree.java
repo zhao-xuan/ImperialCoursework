@@ -59,13 +59,13 @@ public class QuadTree implements QuadTreeInterface {
       }
     } else {
       if (node.values.size() < nodeCapacity) {
-        node.values.add(0, elem);
+        node.values.add(node.values.size() + 1, elem);
       } else {
         node.subdivide();
         ListInterface<Object2D> temp = node.values;
-        temp.add(0, elem);
+        temp.add(node.values.size() + 1, elem);
         node.values = null;
-        for (int i = 0; i < temp.size(); i++) {
+        for (int i = 1; i <= temp.size(); i++) {
           Point2D center = temp.get(i).getCenter();
           if (node.NE.region.covers(center)) {
             addHelper(node.NE, elem);
@@ -113,9 +113,9 @@ public class QuadTree implements QuadTreeInterface {
       queryRegionHelper(node.SE, region, bucket);
       queryRegionHelper(node.SW, region, bucket);
     } else {
-      for (int i = 0; i < node.values.size(); i++) {
+      for (int i = 1; i <= node.values.size(); i++) {
         if (region.covers(node.values.get(i).getCenter())) {
-          bucket.add(0, node.values.get(i));
+          bucket.add(bucket.size() + 1, node.values.get(i));
         }
       }
     }
@@ -129,7 +129,6 @@ public class QuadTree implements QuadTreeInterface {
   public boolean contains(Object2D elem) {
     return containsHelper(root, elem);
   }
-
 
   /**
    * @param elem the 2D-object to search for in the tree.
